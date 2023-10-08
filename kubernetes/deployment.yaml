@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blazerapp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blazer-app
+  template:
+    metadata:
+      labels:
+        app: blazer-app
+    spec:
+      containers:
+        - name: blazer-server-app
+          image: shyamalenduojha/demoblazorapp:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "300Mi"
+              cpu: "250m"
+            limits:
+              memory: "500Mi"
+              cpu: "500m"
+          env:
+#           - name: ASPNETCORE_ENVIRONMENT
+#             value: "Development"
+           - name: DB_HOST  # The name of the environmental variable
+             value: "sqlserver-nodeport"
+           - name: DB_NAME
+             value: "DemoBlazorApp"
+           - name: DB_SA_PASSWORD
+             valueFrom:
+               secretKeyRef:
+                 name: sqlserver-secret
+                 key: sql-password
