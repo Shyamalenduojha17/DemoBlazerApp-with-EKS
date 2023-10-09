@@ -1,0 +1,11 @@
+apiVersion: autoscaling/v2
+kind: VerticalPodAutoscaler
+metadata:
+  name: sql-vpa
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: StatefulSet
+    name: sqlserver-statefulset
+  updatePolicy:
+    updateMode: "Off"
