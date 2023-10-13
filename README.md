@@ -1,2 +1,2 @@
-# Deploy Dotnet based Application on AWS EKS
+# Deploying .NET Application on an AWS EKS Cluster
 
